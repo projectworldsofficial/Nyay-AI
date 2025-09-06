@@ -15,8 +15,7 @@ This was developed as a final year academic project to showcase the power of mod
 
 Here is Nyay AI in action, demonstrating its sleek, modern UI and its ability to remember the user's name throughout a conversation.
 
-*(**Action Required:** Replace this text with a great screenshot of your final, working UI!)*
-*Example: `![Nyay AI Showcase](https://raw.githubusercontent.com/projectworldsofficial/Nyay-AI/main/screenshots/1.png)`*
+![Nyay AI Showcase](https://raw.githubusercontent.com/projectworldsofficial/Nyay-AI/main/screenshots/1.png)
 
 ---
 
@@ -32,7 +31,7 @@ Here is Nyay AI in action, demonstrating its sleek, modern UI and its ability to
 
 ## 🛠️ Tech Stack
 
-- **Foundation Model:** `![varma007ut/Indian_Legal_Assitant](https://huggingface.co/varma007ut/Indian_Legal_Assitant)` (LLaMA 3.1 8B GGUF)
+- **Foundation Model:** ![varma007ut/Indian_Legal_Assitant](https://huggingface.co/varma007ut/Indian_Legal_Assitant) (LLaMA 3.1 8B GGUF)
 - **Backend:** Python, Flask
 - **AI Engine:** `llama-cpp-python`
 - **GPU Acceleration:** NVIDIA CUDA
