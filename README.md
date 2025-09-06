@@ -21,7 +21,7 @@ Here is Nyay AI in action, demonstrating its sleek, modern UI and its ability to
 
 Click the thumbnail below to watch a full showcase of Nyay AI in action, including a demonstration of its conversational memory and deep legal knowledge.
 
-[![Nyay AI - Personal AI Law Advisor for India (Project Showcase)](https://youtu.be/KvXmbnJ5wco)
+[[Nyay AI - Personal AI Law Advisor for India (Project Showcase)](https://youtu.be/KvXmbnJ5wco)]
 
 ---
 
