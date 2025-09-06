@@ -17,6 +17,12 @@ Here is Nyay AI in action, demonstrating its sleek, modern UI and its ability to
 
 ![Nyay AI Showcase](https://raw.githubusercontent.com/projectworldsofficial/Nyay-AI/main/screenshots/1.png)
 
+## 🎬 Watch the Live Demo on YouTube!
+
+Click the thumbnail below to watch a full showcase of Nyay AI in action, including a demonstration of its conversational memory and deep legal knowledge.
+
+[![Nyay AI - Personal AI Law Advisor for India (Project Showcase)](https://raw.githubusercontent.com/projectworldsofficial/Nyay-AI/main/screenshots/1.png)](https://youtu.be/KvXmbnJ5wco)
+
 ---
 
 ## ✨ Core Features
