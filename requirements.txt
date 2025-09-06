@@ -1,0 +1,21 @@
+# ===================================================================
+# Final Requirements for Nyay AI (Personal AI Law Advisor)
+# Project by: Yugesh [Your Last Name Here]
+#
+# Environment: Python 3.10 (64-bit)
+# For GPU acceleration, PyTorch and llama-cpp-python must be
+# installed separately with CUDA support. See README for details.
+# ===================================================================
+
+# -- Web Framework --
+Flask==3.0.3
+
+# -- Core AI Libraries (Pinned to stable, compatible versions) --
+transformers==4.43.0
+bitsandbytes==0.43.2
+accelerate==0.32.1
+
+# -- Helper Libraries --
+numpy==2.2.6
+diskcache==5.6.3
+jinja2==3.1.6

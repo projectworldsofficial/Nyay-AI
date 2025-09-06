@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyay AI - Your Indian Legal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            /* FIX 1: A richer, slightly darker background gradient */
+            --body-bg: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            --chat-bg: rgba(255, 255, 255, 0.5); /* Slightly less transparent */
+            --header-bg: linear-gradient(90deg, #3a3a3a 0%, #000000 100%);
+            --user-bubble-bg: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            --bot-bubble-bg: #ffffff;
+            --input-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: var(--body-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: var(--chat-bg);
+            backdrop-filter: blur(12px); /* Increased blur */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25); /* Stronger shadow */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-header {
+            background: var(--header-bg);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        #chat-box { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+        #chat-box::-webkit-scrollbar { width: 8px; }
+        #chat-box::-webkit-scrollbar-track { background: transparent; }
+        #chat-box::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        #chat-box::-webkit-scrollbar-thumb:hover { background: #aaa; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .message { animation: fadeIn 0.3s ease-out; }
+
+        .message p {
+            padding: 12px 20px;
+            border-radius: 18px;
+            max-width: 80%;
+            display: inline-block;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message { text-align: right; }
+        .user-message p {
+            background: var(--user-bubble-bg);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3); /* Shadow for user bubble */
+            border-radius: 18px 18px 4px 18px;
+        }
+
+        .bot-message { position: relative; }
+        .bot-message p {
+            background: var(--bot-bubble-bg);
+            color: #333;
+            text-align: left;
+            /* FIX 2: Added border and stronger shadow to make it pop */
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 18px 18px 18px 4px;
+        }
+
+        #example-prompts { padding: 0 20px 10px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .prompt-pill { background: rgba(255, 255, 255, 0.7); padding: 6px 12px; border-radius: 15px; font-size: 14px; cursor: pointer; transition: background-color 0.2s; border: 1px solid #e9ecef; }
+        .prompt-pill:hover { background: rgba(255, 255, 255, 1); }
+
+        #input-container { padding: 15px 20px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        #input-wrapper { display: flex; align-items: center; background: var(--input-bg); border-radius: 25px; padding: 5px 5px 5px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #user-input { flex-grow: 1; border: none; outline: none; background: transparent; font-size: 16px; }
+        #send-button { background: var(--user-bubble-bg); border: none; border-radius: 50%; width: 40px; height: 40px; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; }
+        #send-button:hover { transform: scale(1.1); }
+
+        .typing-indicator { display: inline-block; margin: 0 5px; width: 8px; height: 8px; background-color: #6c757d; border-radius: 50%; animation: bounce 1.3s infinite; }
+        .typing-indicator:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .copy-btn { position: absolute; bottom: 10px; right: 0px; background: #adb5bd; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; opacity: 0; transition: opacity 0.2s; font-size: 14px; }
+        .bot-message:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">
+            Nyay AI ⚖️
+        </div>
+        <div id="chat-box">
+            <div class="message bot-message">
+                <p>Hello! I am Nyay AI, your personal Indian Legal Assistant. How can I assist you with your legal queries today?</p>
+            </div>
+            <div id="example-prompts">
+                <div class="prompt-pill">Summarize Kesavananda Bharati case</div>
+                <div class="prompt-pill">What are Fundamental Rights?</div>
+                <div class="prompt-pill">Explain Section 302 of IPC</div>
+            </div>
+        </div>
+        <div id="input-container">
+            <div id="input-wrapper">
+                <input type="text" id="user-input" placeholder="Ask a question about Indian law...">
+                <button id="send-button" title="Send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const examplePromptsContainer = document.getElementById('example-prompts');
+
+        let conversationHistory = [];
+
+        async function sendMessage(messageText) {
+            const userMessage = messageText || userInput.value.trim();
+            if (userMessage === '') return;
+
+            if (examplePromptsContainer) {
+                // THIS IS THE FIX: The typo is corrected here.
+                examplePromptsContainer.style.display = 'none';
+            }
+
+            conversationHistory.push({ role: 'user', content: userMessage });
+            appendMessage(userMessage, 'user-message');
+            userInput.value = '';
+            showLoader(true);
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/get_response', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ history: conversationHistory })
+                });
+
+                if (!response.ok) throw new Error("Server error");
+
+                const data = await response.json();
+                const botResponse = data.response;
+
+                conversationHistory.push({ role: 'assistant', content: botResponse });
+                appendMessage(botResponse, 'bot-message');
+
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('Sorry, something went wrong. Please check the console.', 'bot-message');
+            } finally {
+                showLoader(false);
+            }
+        }
+
+        function appendMessage(message, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            const messageP = document.createElement('p');
+            messageP.textContent = message;
+            messageDiv.appendChild(messageP);
+            if (className === 'bot-message') {
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+                copyBtn.onclick = () => {
+                    navigator.clipboard.writeText(message);
+                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    setTimeout(() => { copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 2000);
+                };
+                messageDiv.appendChild(copyBtn);
+            }
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showLoader(isLoading) {
+            let loader = document.getElementById('loader');
+            if (isLoading && !loader) {
+                loader = document.createElement('div');
+                loader.id = 'loader';
+                loader.className = 'message bot-message';
+                loader.innerHTML = `<p><span class="typing-indicator"></span><span class="typing-indicator"></span><span class="typing-indicator"></span></p>`;
+                chatBox.appendChild(loader);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } else if (!isLoading && loader) {
+                loader.remove();
+            }
+        }
+
+        sendButton.addEventListener('click', () => sendMessage());
+        userInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') sendMessage();
+        });
+
+        document.querySelectorAll('.prompt-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const promptText = pill.textContent;
+                userInput.value = promptText;
+                sendMessage(promptText);
+            });
+        });
+    </script>
+</body>
+</html>

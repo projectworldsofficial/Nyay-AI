@@ -1,0 +1,17 @@
+1. Foundational Legal Concept:
+"What are the Fundamental Rights guaranteed to citizens under the Constitution of India? Please list a few."
+Why it's a good question: This tests the model's core knowledge of the most important part of the Indian Constitution. It demonstrates its ability to recall and list key information.
+2. Landmark Case Law Summary:
+"Can you summarize the landmark Supreme Court case of Kesavananda Bharati v. State of Kerala and explain its significance?"
+Why it's a good question: This is arguably the most important case in Indian constitutional history. A good answer will show the model can understand complex legal history, summarize key arguments (like the "basic structure doctrine"), and explain its long-term impact.
+3. Specific Statutory Provision:
+"What are the essential elements of a valid contract under the Indian Contract Act, 1872?"
+Why it's a good question: This tests its knowledge of a specific and fundamental piece of civil law. It requires a structured answer, likely as a list, which is a great capability to showcase.
+4. Common Legal Procedure:
+"What is the general procedure for filing an FIR (First Information Report) at a police station in India?"
+Why it's a good question: This is a very practical, real-world question. It demonstrates the model's usefulness as an "assistant" by providing step-by-step procedural information.
+5. Hypothetical Scenario (Consumer Law):
+"If I buy a new laptop in India and it stops working within a week, what are my legal rights as a consumer?"
+Why it's a good question: This shows the model's ability to apply legal principles to a hypothetical situation. A good answer would mention the Consumer Protection Act, and concepts like 'repair, replacement, or refund'.
+6. Differentiating Legal Terms (Criminal Law):
+"What is the difference between 'bail' and 'anticipatory bail' under Indian criminal law?"
